@@ -48,9 +48,12 @@ app.get("/api/articles", function(req, res){
         var results = [];
 
         $(".postlist__item--compact").each(function(i, element){
+            // var release = Date($(element).find("time").attr("datetime"));
+
+
             var newArticle = {
                 title : $(element).find(".headline a").text(),
-                release : $(element).find("time").attr("datetime"),
+                release : $(element).find("time a").attr("title"),
                 url : $(element).find(".headline a").attr("href"),
                 summary : $(element).find(".entry-summary p").text()
             }
