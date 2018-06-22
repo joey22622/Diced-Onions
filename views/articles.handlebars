@@ -1,0 +1,21 @@
+<!-- 4. Output the animalType string, pet boolean and fierceness number to the page. -->
+
+<section class="articles-section">
+    {{#each this}}
+<a class="article-link" href="{{url}}">
+        <div class="article-thumbnail" data-id="{{_id}}">
+            <h3>{{title}}</h3>
+            <p>{{release.toDateString}}</p>
+            <p>{{summary}}</p>
+        </div>
+    </a>
+    {{/each}}
+</section>
+
+<section class="comments-section">
+    <div class="comment-form"> 
+        <input class="comment-name" data-form-field="name" placeholder="What's your name?">
+        <textarea class="comment-body" data-form-field="body" placeholder="Insert comment here"></textarea>
+    </div>
+
+</section>
