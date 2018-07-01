@@ -65,8 +65,6 @@ app.get("/api/articles", function(req, res){
                 console.log("ERROR HAS OCCURED " +err);
             });
         });
-
-
         res.json(results);
     });
 });
@@ -75,14 +73,82 @@ app.get("/api/articles", function(req, res){
 
 app.get("/", function(req, res) {
     db.Article.find({}).sort("-release").then(function(data){
-            res.render("articles", data);
+        console.log(data);
+        res.render("articles", {articles : data});
     });
-    // Handlebars requires an object to be sent to the dog handlebars file.
-    // Lucky for us, animals[0] is an object!
-  
-    // 1. send the dog object from the animals array to the dog handlebars file.
   });
+
+app.post("/api/comments/:id", function(req, res){
+    const newComment = {
+        name : req.body.name,
+        body : req.body.body,
+        articleId : req.params.id
+    }
+    console.log("=========================")
+    console.log(newComment);
+    db.Comment.create(newComment).then(function(data){
+        res.json(data);
+    }).catch(function(err){
+        console.log(err);
+    });
+});
+
+app.get("/api/comments/:id", function(req, res){
+    db.Comment.find({
+        articleId : req.params.id
+    }).then(function(data){
+        console.log(data);
+        res.render("articles", {comments : data})
+    }).catch(function(err){
+        console.log(err);
+    });
+});
 
 app.listen(PORT, function() {
     console.log("App running on port " + PORT + "!");
   });
+
+
+//   app.get("/", function(req, res){
+//     //creats scrape request for HTML, pointed at the politics page of the Onion
+//     axios.get("https://www.theonion.com/c/news-in-brief").then( function(response){
+       
+//         //Loads HTML into cheerio
+//         var $ = cheerio.load(response.data);
+
+//         //empty array to store scraped info
+//         var results = [];
+//         db.Article.find({}).then(function(data){
+            
+//         $(".postlist__item--compact").each(function(i, element){
+//             // var release = Date($(element).find("time").attr("datetime"));
+
+
+
+//             var newArticle = {
+//                 title : $(element).find(".headline a").text(),
+//                 release : $(element).find("time a").attr("title"),
+//                 url : $(element).find(".headline a").attr("href"),
+//                 summary : $(element).find(".entry-summary p").text()
+//             }
+//             for(var i = 0; i < data.length; i++){
+//                 if(newArticle.title !== data.title){
+//                     results.push(newArticle);
+//                     db.Article.create(newArticle).then(function(data){
+//                         console.log(data);
+
+//                     }).catch(function(err){
+//                         console.log("ERROR HAS OCCURED " +err);
+//                     });
+//                 }
+//             }
+//         });
+//     }).then(function(data){
+//         db.Article.find({}).sort("-release").then(function(data){
+//             res.render("articles", data);
+//         });
+//     });
+
+//         res.json(results);
+//     });
+// })

@@ -12,10 +12,14 @@ var CommentSchema = new Schema({
     body : {
         type : String,
         required : true
+    },
+    articleId : {
+        type : String,
+        required : true
     }
 });
 
 
 var Comment = mongoose.model("Comment", CommentSchema);
 
-module.exports = Comment;
+module.exports = Comment; 
