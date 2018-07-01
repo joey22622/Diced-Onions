@@ -6,20 +6,25 @@ var ArticleSchema = new Schema({
     title : {
         type: String,
         required : true
-
+        // unique : true,
     },
     release : {
         type : String,
         required : true
+        // unique : true,
     },
     summary : { 
         type : String,
-        required : true,
-
+        required : true
+        // unique : true,
     }, url : {
         type : String,
-        required : true
-    }
+        required : true,
+        // unique : true,
+    },  comments : [
+        {type: Schema.Types.ObjectId,
+        ref: "Comment"}
+    ]
 
 });
 
