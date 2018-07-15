@@ -81,14 +81,12 @@
         <p>Click an article to read/leave comments!</p>
     </div>
     <div class="comment-form inactive">
+        <p class="comment-disclaimer">This is an unmonitored, public forum. Don't be part the internet's cancer.  Thanks!</p>
         <div class="posted-comment-wrap">
-            {{#each comments}}
-            <div class="comment">
-                <p>{{this.name}}</p>
-            </div>
-            {{/each}}
+
 
         </div>
+        <label>Leave your comments here</label>
         <input class="comment-name" data-form-field="name" placeholder="What's your name?">
         <textarea class="comment-body" data-form-field="body" placeholder="Insert comment here"></textarea>
         <div class="button-row">

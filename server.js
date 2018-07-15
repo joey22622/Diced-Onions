@@ -82,7 +82,8 @@ app.post("/api/comments/:id", function(req, res){
     const newComment = {
         name : req.body.name,
         body : req.body.body,
-        articleId : req.params.id
+        articleId : req.params.id,
+        time : req.body.time
     }
     console.log("=========================")
     console.log(newComment);
@@ -98,7 +99,8 @@ app.get("/api/comments/:id", function(req, res){
         articleId : req.params.id
     }).then(function(data){
         console.log(data);
-        res.render("articles", {comments : data})
+        // res.render("articles", {comments : data})
+        res.json(data);
     }).catch(function(err){
         console.log(err);
     });
