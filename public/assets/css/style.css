@@ -3,6 +3,24 @@ input,
 textarea{
     border: none;
 }
+.refresh-button,
+.send-comment{
+    background: rgba(255,255,255,.01);
+    border: solid black 1px;
+    color: white;
+    box-shadow: 0px 6px 20px rgba(0,0,0,.5);
+    transition: .3s;
+
+}
+.refresh-button:hover,
+.send-comment:hover{
+    box-shadow: 0px 6px 20px rgba(0,100,0,.5);
+    border: solid 1px rgba(255,255,255,.7);
+    cursor: pointer;
+    transform: scale(1.1);
+    border-radius: 4px;
+
+}
 .content-wrap{
     background: rgba(0,0,0,.1);
     min-height: 100vh;
@@ -95,7 +113,9 @@ textarea{
 
 .refresh-button-wrap{
     display: flex;
-    background: rgba(0,0,0,1);
+    background: rgba(0,0,0,.1);
+    box-shadow: 0px 10px 15px rgba(0,0,0,.2);
+    border: solid 1px rgba(255,255,255,.05);
     justify-content: center;
     padding: 1rem;
 }
@@ -111,6 +131,46 @@ textarea{
     font-size: 2rem;
     text-align: center;
     line-height: 1.5em;
+}
+
+.posted-comment-wrap{
+    margin-bottom: 1rem;
+}
+.comment-disclaimer,
+label{
+    color: rgba(255,255,255,.8);
+    letter-spacing: .1rem;
+    line-height: 1rem;
+    text-transform: uppercase;
+    padding: 1rem;
+    font-size: .7rem;
+}
+.comment-wrap{
+    padding: 1rem;
+    background: rgba(100,100,100,.01);
+    color: white;
+    border: solid 1px rgba(255,255,255,.05);
+    box-shadow: 5px 5px 15px rgba(0,0,0,1);
+    margin: .5rem;
+}
+
+.comment-details{
+    display: flex;
+    justify-content: space-between;
+    text-transform: uppercase;
+    border-bottom: black solid 1px;
+    padding: 0 .5rem;
+    padding-bottom: 1rem;
+    margin-bottom: 1rem;
+}
+.comment-date{
+    color: rgba(255,255,255,.6);
+}
+.comment-wrap .comment-body{
+    padding: 0 .5rem;
+    font-size: .8rem;
+    font-style: italic;
+    color: rgba(255,255,255,.8);
 }
 
 .comment-form{
@@ -131,6 +191,10 @@ textarea{
     margin: .5rem 1rem;;
     border-radius: .2rem;
     padding: .5rem;
+    background: rgba(0,0,0,.1);
+    box-shadow: 5px 5px 10px inset rgba(0,0,0,.5);
+    border: solid 1px rgba(255,255,255,.05);
+    color: white;
 }
 
 textarea{
@@ -139,7 +203,6 @@ textarea{
 .button-row{
     display: flex;
     justify-content: center;
-    background: green;
     margin: .5rem 1rem;
     padding: 1rem;
 }

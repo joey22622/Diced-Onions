@@ -16,6 +16,10 @@ var CommentSchema = new Schema({
     articleId : {
         type : String,
         required : true
+    },
+    time : {
+        type : Date,
+        required: true
     }
 });
 
