@@ -9,7 +9,7 @@ var axios = require("axios");
 var path = require("path");
 
 
-var PORT = 3000;
+var PORT = process.env.PORT || 3000;
 
 // sets instnance of express.js
 var app = express();
