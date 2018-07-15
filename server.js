@@ -21,6 +21,10 @@ app.use(express.static("public"));
 // requires all database models
 var db = require("./models");
 
+//Mongo configuration for HEROKU
+if (process.env.MONGODB_URI) {
+    mongoose.connect(process.env.MONGODB_URI);
+}
 
 app.engine("handlebars", exphbs({ defaultLayout: "main" }));
 app.set("view engine", "handlebars");
@@ -139,7 +143,7 @@ app.listen(PORT, function() {
 //                     db.Article.create(newArticle).then(function(data){
 //                         console.log(data);
 
-//                     }).catch(function(err){
+//                     }).catch(function(err){ 
 //                         console.log("ERROR HAS OCCURED " +err);
 //                     });
 //                 }
