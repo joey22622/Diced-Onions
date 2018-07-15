@@ -1,6 +1,6 @@
 # Diced Onions
 
-**DESCRIPTION:** App that scrapes recent political articles from the Onion and allows users to leave their comments
+**DESCRIPTION:** App that scrapes recent political articles from the Onion and allows users to leave their comments.
 
 ![App Tutorial](Diced-Onions.gif)
 
