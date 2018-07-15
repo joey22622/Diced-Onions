@@ -7,6 +7,17 @@ function scrapeOnion(){
         console.log(err);
     });
 }
+function countArticles(){
+    var articleLength = $(".articles-section > .article-thumbnail").length;
+    if(articleLength > 0){
+        console.log("yes");
+    } else {
+        console.log(articleLength);
+        var scrapeButton = $("<button class='scrape-button' type='submit'>").text("Click to scrape the Onion!")
+        var message = $("<div class='scrape-message'>").text("No articles yet, click the button above to grab some!")
+        $(".articles-section").append(scrapeButton, message);
+    }
+}
 
 function setWrapWidth (){
     var width = $(".articles-section").width() - 100;
@@ -74,8 +85,11 @@ function submitComment(){
 
 
 $(".refresh-button").on("click" , scrapeOnion);
+$(document).on("click", ".scrape-button" ,  scrapeOnion);
 $(".article-thumbnail").on("click", setActiveArticle);
 $(".send-comment").on("click", submitComment);
 $(document).ready(setWrapWidth);
+$(document).ready(countArticles);
+
 
 

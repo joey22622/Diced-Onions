@@ -39,10 +39,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static("public"));
 
 
-// app.get("/", function(req,res){
-//     res.sendFile(path.join(__dirname, "/views/dog.handlebars"));
-// });
-
+//route that runs 
 app.get("/api/articles", function(req, res){
     //creats scrape request for HTML, pointed at the politics page of the Onion
     axios.get("https://www.theonion.com/c/news-in-brief").then( function(response){
@@ -53,30 +50,38 @@ app.get("/api/articles", function(req, res){
         //empty array to store scraped info
         var results = [];
 
+        // stores selected HTML elements into JSON format
         $(".postlist__item--compact").each(function(i, element){
-            // var release = Date($(element).find("time").attr("datetime"));
-
-
             var newArticle = {
                 title : $(element).find(".headline a").text(),
                 release : $(element).find("time a").attr("title"),
                 url : $(element).find(".headline a").attr("href"),
                 summary : $(element).find(".entry-summary p").text()
             }
-            results.push(newArticle);
-            db.Article.create(newArticle).then(function(data){
-                console.log(data);
+            //pushes object into results array
+            db.Article.find({title : newArticle.title}, function(err, data){
+                if(!data.length){
+                results.push(newArticle);
+                //stores results array in Article collection
+                db.Article.create(newArticle).then(function(data){
+                    console.log(data);
+
+                }).catch(function(err){
+                    console.log("ERROR HAS OCCURED " +err);
+                });
+            }
 
             }).catch(function(err){
-                console.log("ERROR HAS OCCURED " +err);
+                console.log(err);
             });
+                
+        
         });
         res.json(results);
     });
 });
 
-
-
+//route finds all in articles collection and orders them by release
 app.get("/", function(req, res) {
     db.Article.find({}).sort("-release").then(function(data){
         console.log(data);
@@ -84,6 +89,7 @@ app.get("/", function(req, res) {
     });
   });
 
+// posts new comment and assigns articleId of active article
 app.post("/api/comments/:id", function(req, res){
     const newComment = {
         name : req.body.name,
@@ -91,8 +97,6 @@ app.post("/api/comments/:id", function(req, res){
         articleId : req.params.id,
         time : req.body.time
     }
-    console.log("=========================")
-    console.log(newComment);
     db.Comment.create(newComment).then(function(data){
         res.json(data);
     }).catch(function(err){
@@ -100,12 +104,12 @@ app.post("/api/comments/:id", function(req, res){
     });
 });
 
+// gets all comments that correspond with active article's id
 app.get("/api/comments/:id", function(req, res){
     db.Comment.find({
         articleId : req.params.id
     }).then(function(data){
         console.log(data);
-        // res.render("articles", {comments : data})
         res.json(data);
     }).catch(function(err){
         console.log(err);
@@ -116,47 +120,3 @@ app.listen(PORT, function() {
     console.log("App running on port " + PORT + "!");
   });
 
-
-//   app.get("/", function(req, res){
-//     //creats scrape request for HTML, pointed at the politics page of the Onion
-//     axios.get("https://www.theonion.com/c/news-in-brief").then( function(response){
-       
-//         //Loads HTML into cheerio
-//         var $ = cheerio.load(response.data);
-
-//         //empty array to store scraped info
-//         var results = [];
-//         db.Article.find({}).then(function(data){
-            
-//         $(".postlist__item--compact").each(function(i, element){
-//             // var release = Date($(element).find("time").attr("datetime"));
-
-
-
-//             var newArticle = {
-//                 title : $(element).find(".headline a").text(),
-//                 release : $(element).find("time a").attr("title"),
-//                 url : $(element).find(".headline a").attr("href"),
-//                 summary : $(element).find(".entry-summary p").text()
-//             }
-//             for(var i = 0; i < data.length; i++){
-//                 if(newArticle.title !== data.title){
-//                     results.push(newArticle);
-//                     db.Article.create(newArticle).then(function(data){
-//                         console.log(data);
-
-//                     }).catch(function(err){ 
-//                         console.log("ERROR HAS OCCURED " +err);
-//                     });
-//                 }
-//             }
-//         });
-//     }).then(function(data){
-//         db.Article.find({}).sort("-release").then(function(data){
-//             res.render("articles", data);
-//         });
-//     });
-
-//         res.json(results);
-//     });
-// })

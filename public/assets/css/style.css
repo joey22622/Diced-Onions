@@ -3,6 +3,24 @@ input,
 textarea{
     border: none;
 }
+.scrape-button{
+    cursor: pointer;
+    color: white;
+    background: rgba(255,255,255,.2);
+    text-shadow: 0 0 3px rgba(0,0,0,1);
+    margin: .5rem auto;
+    padding: 1rem 3rem;
+    font-size: 1rem;
+    box-shadow: 0px 10px 15px rgba(0,0,0,.2);
+    transition: .3s;
+    border:1px solid white;
+}
+.scrape-button:hover{
+    color: white;
+    transform: scale(1.1);
+    background: rgba(0,0,0,.3);
+    border: solid 1px rgba(0,0,0,.6);
+}
 .refresh-button,
 .send-comment{
     background: rgba(255,255,255,.01);
@@ -47,6 +65,18 @@ textarea{
 .comment-section{
     background: rgba(0,0,0,.9);
     flex-grow: 100;
+}
+
+.scrape-message{
+    margin: 5rem auto;
+    text-align: center;
+    font-size: 1.8rem;
+    padding: 2rem;
+    line-height: 1.4em;
+    color: white;
+    text-shadow: 1px 1px 4px rgba(0,0,0,.5);
+
+
 }
 
 .article-thumbnail{
@@ -123,12 +153,12 @@ textarea{
 .comments-blank{
     background: rgba(255,255,255,.01);
     box-shadow: 5px 10px 20px rgba(0,0,0,.5);
-    padding: 8rem 0;
-    color: green;
+    padding: 3rem;
     margin: 1rem;
 }
 .comments-blank p{
-    font-size: 2rem;
+    font-size: 1.8rem;
+    color: white;
     text-align: center;
     line-height: 1.5em;
 }
