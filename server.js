@@ -24,6 +24,9 @@ var db = require("./models");
 //Mongo configuration for HEROKU
 if (process.env.MONGODB_URI) {
     mongoose.connect(process.env.MONGODB_URI);
+} else {
+    mongoose.connect("mongodb://localhost/dicedOnions");
+
 }
 
 app.engine("handlebars", exphbs({ defaultLayout: "main" }));
@@ -35,7 +38,6 @@ app.use(bodyParser.urlencoded({ extended: true }));
 // Use express.static to serve the public folder as a static directory
 app.use(express.static("public"));
 
-mongoose.connect("mongodb://localhost/dicedOnions");
 
 // app.get("/", function(req,res){
 //     res.sendFile(path.join(__dirname, "/views/dog.handlebars"));
